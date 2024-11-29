@@ -1,0 +1,597 @@
+---
+output:
+  pdf_document:
+    toc: false
+    toc_depth: 3
+    number_sections: true
+header-includes:
+- \usepackage{tikz}
+- \usepackage{graphicx}
+- \usepackage{geometry}
+- \usepackage{fancyhdr}
+- \usepackage{titlesec}
+- \geometry{a4paper, left=3.5cm, right=2.5cm, top=4cm, headsep=1.2cm, heightrounded, bindingoffset=5mm}
+- \usepackage{setspace}
+- \usepackage{textcomp}
+bibliography: references.bib
+csl: apa.csl
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+<!-- FIRST PAGE -->
+
+\thispagestyle{empty} <!-- doesn't show page number -->
+
+\begin{center}
+\begin{tikzpicture}[remember picture,overlay]
+\node[anchor=center, inner sep= 0pt] 
+{\includegraphics[height=3.5cm]
+{IMAGES/logo_salento.png}};
+\centering
+\end{tikzpicture}
+\vfill
+\LARGE
+\textsc{Università del Salento}\\
+\rule{\textwidth}{0.1mm}\\
+\large
+\textsc{Department of Biological and Environmental Sciences and Technologies }\\ 
+\bigskip
+Master of Science in Coastal and Marine Biology and Ecology \\
+\vfill %%\vspace{3cm}
+\textsc{Master Thesis in Ecology}\\
+\vfill %%\vspace{3cm}
+\fontsize{16}{18}\selectfont
+\textbf{\textsc{Beyond energy: cybernetic perspectives on metabolism and foraging in ectotherms through bite counting using \textit{Poecilia sphenops} as a model species}}\\
+\end{center}
+\vfill
+
+\noindent
+
+\begin{minipage}[t]{0.45\textwidth}
+\begin{flushleft}
+\begin{tabular}[t]{l}
+Supervisor: \\
+\textbf{Francesco Cozzoli, Phd} \\
+\\
+Co-Supervisor: \\
+\textbf{Sarah Boulamail, Phd}
+\end{tabular}
+\end{flushleft}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.45\textwidth}
+\begin{flushright}
+\begin{tabular}[t]{l}
+Candidate: \\
+\textbf{Sara Ventruti}\\
+
+\end{tabular}
+\end{flushright}
+\end{minipage}
+
+\vfill
+
+\begin{center}
+\normalsize
+\rule{8cm}{0.1mm}\\
+\bigskip
+ACADEMIC YEAR 2023--2024
+\end{center}
+
+\large
+
+<!-- <!-- \usepackage{fancyhdr} -->
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark}
+\fancyfoot[C]{\thepage}
+
+<!-- <!-- % Package to manage titles -->
+
+<!-- <!-- \usepackage{titlesec} -->
+
+<!-- <!-- % Chapter format definition -->
+
+<!-- \titleformat{\chapter}[display] -->
+
+<!--   {\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{20pt}{\Huge} -->
+
+<!-- \titlespacing*{\chapter}{0pt}{50pt}{40pt} -->
+
+<!-- <!-- % Section and subsection settings -->
+
+<!-- \titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{} -->
+
+<!-- \titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection}{1em}{} -->
+
+<!-- \titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection}{1em}{} -->
+
+<!-- \begin{document} -->
+
+<!-- CONTENTS -->
+
+\newpage
+
+\thispagestyle{empty} <!-- doesn't show page number --> \vspace*{\stretch{1}}
+
+\begin{flushright}
+\noindent
+"It's you!" \\[1em] 
+(Toby Fox, \textit{Undertale}, 2015)
+\end{flushright}
+\vspace*{\stretch{6}}
+\cleardoublepage
+
+\newpage
+
+\pagestyle{empty} <!-- doesn't show page number -->
+
+\tableofcontents
+\newpage
+\pagestyle{fancy}
+\onehalfspacing
+
+<!-- CHAPTER 1 -->
+
+# Introduction
+
+## Metabolism as a driving force in ecology
+
+Metabolism is the complex of physical and chemical processes involved in maintaining life. These processes convert organic compounds into molecules needed for cells to function [@schilling2000], acting as a network that allows for the regulation of substrate concentrations, product levels, and reaction rates. It includes many different substrates, enzymes, and pathways, thereby highlighting metabolism's central role in both biochemistry and physiology [@morowitz2000]. Metabolism converts the energy and material resources obtained from their environment into other forms that can be distributed and utilised across different parts of the organism [@killen2010]. These resources are employed in fitness-enhancing processes such as survival, growth, and reproduction; subsequently, the organism can excrete altered forms of these resources back into the environment [@kooijman2010]. As a result, metabolism regulates many aspects of an organism's life, influencing not only its life history traits (e.g., the time required for egg hatching) but also its ecological roles [@burger2019]. Metabolism drives much of the variation in ecosystems - including biological structure, chemical composition, energy and material fluxes, population dynamics and species diversity - all regulated by the laws of conservation of mass and energy and the principles of thermodynamics [@brown2004]. Given the well-established principles of mass and energy conservation, it is not surprising that many ecologists are inclined to develop a metabolic theory as a conceptual foundation for ecology.
+
+One of the most affirmed metabolic theories is the Metabolic Theory of Ecology (MTE). MTE is a mechanistic, quantitative, synthetic framework that characterises the effects of body size and temperature on the metabolism of individual organisms, and how metabolic rate can have far-reaching effects on higher-order ecological phenomena like populations, communities, and ecosystems. According to MTE, metabolic rates predictably scale with body size, following a power-law relationship where metabolic rate is proportional to body mass raised to the 3/4 power (often expressed as $M^{3/4}$, where $M$ is body mass). This relationship is observed across a broad spectrum of organisms, from microbes to mammals. Moreover, MTE integrates the influence of temperature on metabolic rates, recognizing that metabolic processes are influenced by temperature according to the Boltzmann-Arrhenius equation: as temperature increases, metabolic rates typically increase exponentially until a certain threshold, beyond which biological processes may be disrupted. One of the key strengths of this theory is its ability to generate clear, quantitative predictions grounded in fundamental principles. Any remaining variation can be assessed by comparing it to these predictions, and the extent and direction of these deviations can offer valuable insights into the underlying causes [@brown2004].
+
+On the other hand, the Dynamic Energy Budget (DEB) theory is a functional trait-based, mechanistic bioenergetic modeling approach that links how an individual organism manages energy and mass to maximize fitness, with implications for individual behavior and population growth. It explains that the flow of energy through an organism, as well as the efficiency of this process, is primarily controlled by metabolism, which is closely tied to body size [@kooijman2010]. The DEB theory also considers how each species allocates the energy it obtains from its environment and how the prioritisation of energy use is managed, including key decisions an organism unconsciously makes to optimise fitness throughout its lifespan [@charnov1974; @loreau2010]. This model is based on a complex mathematical framework that can be simplified by partitioning into two separate large compartments (Fig. \ref{fig:deb_sara_2014}): an upper part that explains how energy is acquired and stored, and a lower part that explains how energy allocation is distributed and prioritised between different stages of the organism's life history, such as development and reproduction. The connection between the compartments is represented by a middle part that indicates how all the energy coming from the upper part is stored first and then made available for direct use of the lower part [@sarà2014].
+
+Even though both MTE and DEB focus on the role of metabolism in shaping ecological and biological processes, MTE primarily emphasises the scaling effects of body size and temperature on metabolic rates, whereas DEB provides a more detailed framework for energy acquisition and allocation across an organism's life history stages.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.43\textwidth]{IMAGES/DEB_Sara_2014.jpeg}
+  \caption{Schematic representation of the standard Dynamic Energy Budget model (Kooijman, 2010) and the flux of energy through an organism coming from the environment. In this case, suspension feeder bivalves have been used as model species (Sarà et al., 2014).}
+  \label{fig:deb_sara_2014}
+\end{figure}
+
+## Limitations of traditional metabolic theories: towards a comprehensive metabolic model
+
+During the past 150 years, metabolic scaling-based theories have dominated the energetic ecology scenario [@glazier2022], however, a new ecological approach started to question their validity. The mechanistic modeling approaches, like MTE and DEB, have recently been considered overly simplistic and deterministic, especially about the limiting effect of body mass and surface area on the metabolic scaling exponent: they do not adequately explain the noticeable diversity in metabolic scaling relationships (Fig. \ref{fig:metabolic_scaling_glazier_2022}) observed in the living world [@glazier2014a]. This significant diversity has been considered the result of factors that are considered to be secondary in importance to those causing a presumed primary universal scaling pattern [@glazier2022]. A limitation of theories like MET and DEB is that they focus only on one aspect of life, which is the acquisition and use of energy while ignoring how important it is the acquisition and use of information as well [@glazier2015]. In a future and more holistic metabolic theory, instead, regulatory, information-based systems should play a central role [@glazier2014], since metabolism co-adjusts the need for energy and resources depending not only on the internal but also on the external state of a living system [@glazier2014]. The most successful organisms are those that most effectively use information about their environments to manage the uptake and use of resources: they are, in essence, "well-informed resource users" [@glazier2008].
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.6\textwidth]{IMAGES/metabolic_scaling_glazier_2022.jpg}
+  \caption{Range of intraspecific metabolic scaling exponents ($b$) values within various taxa with sufficient data (based on ordinary least-squares regressions). The grey line refers to unicellular protists, whereas the green line refers to multi-cellular plants, the black lines refer to multi-cellular animals, invertebrates and vertebrates, as whole groups, and the blue lines refer to various invertebrate and vertebrate taxa (D.S. Glazier, 2022).}
+  \label{fig:metabolic_scaling_glazier_2022}
+\end{figure}
+
+The need for a more comprehensive understanding of metabolic scaling relationships highlights the necessity for a more "meta-mechanistic" model, like the Contextual Multimodal Theory (CMT) [@glazier2014] which has the Metabolic-Level Boundaries Hypothesis (MLBH) [@glazier2005] as its central core and it is based on four focal theoretical models: Surface Area (SA), Resource Transport (RT), System Composition (SC) and Resource Demand (RD) theory (Fig. \ref{fig:CMT_glazier_2014}). If living systems are open systems that are continually affected by their environment, the CMT is able to demonstrate how the metabolic scaling exponent changes depending on the dynamic nature and complex hierarchical and interactive organisation of biological systems [@glazier2014].
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.8\textwidth]{IMAGES/CMT_glazier_2014.jpg}
+  \caption{A schematic depiction of the contextual multimodal theory (CMT) of metabolic scaling as applied to individual organisms. Line thickness for the circles and arrows represent the suggested relative importance of each theoretical module and the various modulating factors, respectively, based on current empirical data (D. S. Glazier, 2014a).}
+  \label{fig:CMT_glazier_2014}
+\end{figure}
+
+@burger2019 follows an intermediate approach, significantly expanding the classic MTE to incorporate the DEB theory philosophy. This reworked MTE focuses on biophysical constraints, such as demography and mass-energy balance, that impact life-history traits. Burger's life-history theory explains how organisms allocate metabolic energy for fitness components like growth, survival, and reproduction across their lifespan and how energy metabolism has shaped the evolution of life histories. Despite the vast diversity in life-history strategies, species share fundamental trade-offs between the number and size of offspring, and between parental investment and offspring.
+
+Nevertheless, metabolic and life-history theories can be seen as complementary frameworks, where metabolic scaling can be seen as a result of evolutionary optimization of growth and reproduction instead of a result of physical and geometrical constraints [@Kozlowski1997; @Kozlowski2020]. Under this perspective, metabolism, growth and reproduction have coevolved to maximise fitness, and none of these factors are prioritised over the other, seeing them as interdependent. This indicates that metabolic scaling is not fixed but can change in response to selection pressures: allometric scaling of metabolic rate arises not because it is inevitable but rather because it is advantageous [@white2022].
+
+In other words, metabolism and related concepts aren't rigid but flexible and adaptable, and this complexity suggests that ecology is undergoing a paradigm shift (Fig. \ref{fig:darwin_newton_glazier_2022}) from a deterministic, Newtonian approach toward a more Darwinian, context-dependent, cybernetic approach [@glazier2022].
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=1\textwidth]{IMAGES/darwin_newton_glazier_2022.jpg}
+  \caption{The theory of metabolic scaling has been shifting from "Newtonian" approaches based on physical explanations of a universal law to "Darwinian" approaches based on adaptive regulatory and evolutionary explanations of diverse scaling patterns (D. S. Glazier, 2022).}
+  \label{fig:darwin_newton_glazier_2022}
+\end{figure}
+
+## Pace of Life Syndrome (POLS) and derived models
+
+The understanding of life-history evolution goes back to the concept of r-K selection which states that individuals that grow quickly and mature early should correspondingly produce more offspring per unit time [@pianka1970]. Organisms can be seen as a result of the co-evolution of other types of traits, including behavioural and morphological characteristics [@gopal2023]. To address this complexity, the Pace of Life Syndrome (POLS) model emerged, linking trait covariation across physiology, life history, and behaviour [@montiglio2018]. This conceptual framework puts personality, defined as the individual behavioural differences consistent over time and/or across situations [@réale2007], among the key traits influencing the organism's response to its environment. POLS introduces a slow-fast axis, where "slow" individuals exhibit slower growth rates, reduced metabolic rates, and lower reproductive output, while "fast" individuals are characterised by rapid growth, higher metabolic rates, and greater reproductive output over a shorter lifespan [@ricklefs2002]. This slow-fast continuum aligns closely with the concept of r-K selection. Afterwards was also included a behavioural shy-bold axis [@careau2008; @réale2010], where "shy" individuals tend to be less aggressive, less exploratory, and more social than "bold" ones. These personality traits introduce consistent behavioural differences that interact with metabolic and life-history traits, forming unique adaptations within the POLS framework.
+
+Physiology, life history, and behaviour are shaped by thermal conditions, which significantly influence these traits [@clarke2004; @shine2005; @abram2017]. To incorporate the effects of temperature, the Thermal-Behavioral Syndrome (TBS) was introduced [@goulet2017]. TBS adds a cold-hot axis, where "cold" individuals perform best at lower body temperatures, while "hot" individuals excel at higher temperatures. This model was later integrated with POLS to form an "extended POLS," which accounts for thermal sensitivity along with traits covariation [@goulet2017a]. In this extended framework, the slow-fast, shy-bold, and cold-hot axes are correlated, with metabolism as the underlying mechanism that links all these traits (Fig. \ref{fig:POLS_gopal_2023}). Despite offering a more detailed view of trait covariation, extended POLS still requires further investigation to achieve a true comprehensive POLS hypothesis [@gopal2023].
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.7\textwidth]{IMAGES/POLS_gopal_2023.jpg}
+  \caption{The expanded POLS hypothesis (orange box) incorporates the importance of the thermal environment and thermal physiology in regulating animal behaviour via the Thermal Behavioral Syndrome (TBS), whereas the traditional POLS hypothesis (blue box) connects metabolic physiology with life history and behaviour. The directions of the mechanistic links between the various trait categories are shown by the arrows. Lastly, a fully comprehensive POLS hypothesis (light grey box) may incorporate the roles of several variables (or clarify the ecological settings in which data are most likely to deviate from POLS) (Gopal et al., 2023).}
+  \label{fig:POLS_gopal_2023}
+\end{figure}
+
+## The role of information: organisms as cybernetic systems
+
+Temperature can influence an organism's behaviour through its influence on the organism's metabolism, especially in ectotherms since they exclusively rely on behavioural strategies for thermoregulation [@may1979; @woods2015]. Temperature's effect on ectotherms can be analysed through two interactive mechanisms: kinetic and integrated effects (Fig. \ref{fig:temperature_abram_2017}). Kinetic effects reflect the bottom-up action of temperature on metabolism and physiology since the temperature rise corresponds to faster biochemical reactions across cells, enabling quicker responses to behaviour such as better foraging efficiency and increased locomotion. Thus, integrated effects reflect the organism's ability to process both internal and external thermal information (top-down thermoreception) and use this information to make behavioural choices that optimise fitness [@abram2017].
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.5\textwidth]{IMAGES/temperature_abram_2017.jpg}
+  \caption{Temperature affects ectotherm behaviour through kinetic and integrated effects. Kinetic effects (bottom-up) involve changes in biochemical reactions, while integrated effects (top-down) involve thermoreception and integration by the central nervous system (CNS), influencing the animal's behaviour (Abram et al., 2017).}
+  \label{fig:temperature_abram_2017}
+\end{figure}
+
+This perspective is consistent with cybernetic principles: organisms are self-regulating via feedback loops that balance internal state with external conditions, and they can be considered as cybernetic systems that are constantly sensing, interpreting, and acting upon environmental cues. Organisms do not just respond to their environment, they perceive environmental information that causes complex behaviours and strategies for survival. This view outlines that organisms are causes and consequences in ecological systems, as their constant development is influenced by and shapes environmental states through information-driven behaviour [@oconnor2019].
+
+## Linking resource use and foraging strategies
+
+Energetic and material costs of information processing need to be balanced by resource acquisition [@danchin2004; @gil2018]. Individual energy requirements can affect space-use patterns, patch departure behaviour and ingestion rate. Larger foragers have higher energetic requirements and therefore higher ingestion rates. At the same time, the ingestion rate decreases with resource density. Larger foragers sense the resource as scarce sooner than smaller foragers, and they leave the patch earlier [@basset1995], resulting in a smaller Giving Up Time (GUT) - the moment when a forager decides to leave a resource patch. Furthermore, when the forager faces heterogeneous patches with different resource abundance, it chooses the patch with the highest resource density regardless of the organism's size. Since larger organisms have a lower GUT, it finds itself having to return to the patch with fewer resources to fulfil their high-energy requirements [@cozzoli2018]. This behaviour seems to be affected by temperature, because of its tight relationship with metabolism [@shokri2024]. This pattern appears like a cybernetic feedback loop described before, where the animal actively shapes its foraging behaviour depending on the resource availability information given by the environment itself, thus changing the environmental conditions with its actions (*i.e.* depleting the resources).
+
+Ingestion rate, being an energy-intake rate, acts as a bridge between classic behavioural ecology and ecophysiology, and can be used as a predictor of the effects of climate change on foragers' feeding pressure and energy flows, and their cascade effect on the entire food web and the ecosystems future. However, it can be hard to measure especially in highly mobile organisms, such as fishes, where they need to be observed for a long time and later sacrificed for gut content analysis. In cases like this, bite rates can be used as an empirical proxy for its simplicity and because of its scaling properties to body mass and temperature [@nunes2021; @longo2019].
+
+## Research aim and relevance
+
+This thesis investigates the impact of temperature on patch selection and ingestion rate, using bite rates as a measurable proxy for energy acquisition. A bite is defined as the basic unit of energy intake, representing a single act of food consumption. By quantifying bites, this study aims to estimate ingestion rates and investigate how temperature affects foraging behaviour. Pre-recorded videos from the research conducted by @boulamail2025 were analysed to count the number of bites performed by individual fish during a foraging behaviour assay. These videos were obtained from experiments conducted under highly replicable and controlled laboratory conditions, ensuring consistency in data collection and analysis.
+
+The model species used in this study was *Poecilia sphenops* (black molly), a tropical freshwater fish widely used in eco-physiological research. Black mollies were chosen for their ease of rearing and consistent activity levels, even in unfamiliar environments. Unlike other species, they do not exhibit freezing behaviour, making them suitable for behavioural assays [@boulamail2025].
+
+Sex was considered a critical determinant as fish and other aquatic animals often show significant differences in foraging behaviour between sexes [@cummings2006; @matich2011]. These behavioural differences can influence metabolic responses, making sex an important factor in studies of resource use and energy allocation [@ballance2006].
+
+This research has two main goals:\
+a) to improve our understanding of how temperature influences space/resource use and foraging decisions, providing a more comprehensive view of foraging behaviour in the face of climate change, and\
+b) to develop an integrated R workflow for data management, statistical analysis, visual representation and text editing. This workflow combines the dplyr package [@dplyr] for data manipulation, base R [@base] for analysis, ggplot2 [@ggplot2] for visualisation, and RMarkdown [@rmarkdown] for generating the final document.
+
+\newpage
+
+# Materials and methods
+
+## Data collection protocol by Boulamail *et al.* (2025)
+
+### Fish rearing and experimental conditions \label{sec:experimental_conditions}
+
+In @boulamail2025, thirty specimens of *Poecilia sphenops* (Black molly) were reared in the laboratories of the School of Biodiversity, One Health and Veterinary Medicine, University of Glasgow, including individuals of different sizes, life stages and sexes (16 males and 14 females). Fish were acclimated and maintained under controlled conditions (25\textdegree C, pH 7.3, dissolved oxygen at 7.8 $\pm$ 0.4 mg/l, photoperiod of 14h light/10h dark) in two large tanks divided into contiguous sections separated by plastic dividers with a mesh in the center, so that they could see and smell each other, to allow individual recognition without tags while reducing isolation stress.
+
+Individuals were divided into two groups: the "28-25" group (8 males, 6 females), exposed first to 28\textdegree C and then 25\textdegree C for three weeks each, and the "25-28" group (8 males, 6 females), exposed to 25\textdegree C and then 28\textdegree C (Fig. \ref{fig:temperature_boulamail_2025.png}). Once the individuals were divided into groups, various metrics were measured weekly, specifically foraging behaviour and standard metabolic rate (SMR), along with weight and length.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=1\textwidth]{IMAGES/temperature_boulamail_2025.png}
+  \caption{Schematic representation of the experimental design showing the (28-25) group in the first row and the (25-28) group in the second, explaining that each week corresponded to a replication of the experimental design. Each week each individual in groups (28-25) and (25-28) was measured for foraging behaviour and standard metabolic rate. In total, each individual at the end of the experimental period took 6 total measurements, 3 for each temperature (Boulamail et al., 2025).}
+  \label{fig:temperature_boulamail_2025.png}
+\end{figure}
+
+### Foraging behaviour assay \label{sec:foraging_assay}
+
+Before each foraging behaviour assay, fish were fasted for 24 hours; then, after the assay, they were again fasted for another 24 hours in preparation for the respirometry assay. The two groups followed the same protocol with one week of recovery between each experimental block. Six sets of measurements were collected for each individual, for a total of 168 individual measurements.
+
+Fish foraging behaviour was observed using an experimental maze consisting of a circular plexiglass arena with a diameter of 40 cm, divided into four equal patches by 0.4 mm thick PVC separators. The fishes were able to move freely through all of the maze sections and use both their sense of sight and smell to detect food because the patches were connected by circular holes that were 3.5 cm in diameter. While the other patches were left empty, two patches had food in different quantities (0.30g and 0.15g pellets, respectively, representing high (H) and low (L) amounts of resource). The food was placed in a fine net of 0.5 mm mesh size and mixed with small stones to keep it on the bottom, reducing possible disturbance during video recording from the food's floating (Fig. \ref{fig:maze_boulamail_2025}).
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.8\textwidth]{IMAGES/maze_boulamail_2025.png}
+  \caption{Top and lateral view of the arena divided in 4 sections to perform the foraging assay: two resource patches high and low respectively with (H) High resources 0.3g and (L) Low resources 0.150g of fish pellet, and two empty patches (Boulamail et al., 2025).}
+  \label{fig:maze_boulamail_2025}
+\end{figure}
+
+The maze was filled with 18.85 l of fresh water before each trial, which was heated to the test group's preferred temperature of 25°C or 28°C and maintained at that level by heaters and room temperature control. Resources for food and water had been restored before each trial. The fish were fasted for 24 hours before the foraging behaviour tests. Each test began with a fish being placed inside a transparent cylinder in an empty patch of the maze to acclimate for 2 minutes. The cylinder was then taken out, giving the fish 20 minutes to move around the maze. The trials were recorded using a Logitech HD 1080p camera that was positioned at a fixed distance above the arena. The room was kept dark except for the arena, which was lit sideways with a Lepro Desk Lamp 3000K-6500k to prevent reflections on the water. The videos were then analysed using Ethovision XT15 (Noldus) software, which tracked the fish's movements and time spent in foraging areas at an interval of 1 frame per second. Both groups' behaviour tests were conducted simultaneously, following a protocol intended to reduce animal stress.
+
+### Standard Metabolic Rate measurement via intermittent-flow respirometry
+
+Fish standard metabolic rate (SMR) was estimated by measuring individual oxygen uptake, using intermittent-flow respirometry [@svendsen2016], 24 hours after the foraging behaviour assay. The intermittent-flow respirometry is characterised by having chambers connected to oxygen sensors that were flushed with clean oxygenated water every three minutes, followed by a closed phase in which dissolved oxygen was measured every two seconds. Although SMR data were not used directly in this thesis, these measurements were part of a larger research framework aimed at understanding the energetic aspects of the behaviour and physiology of *Poecilia sphenops*, since this study fits into a broader context where energetic processes are explicitly considered to complement behavioural and metabolism analyses. Oxygen uptake rate was used as a proxy of fish whole-body aerobic metabolism [@chrétien2021; @killen2021]. To ensure measurements in the non-digestive phase, fish were fasted for 24 hours before and during the measurements. The respirometry system included 16 cylindrical glass chambers (11 small with 43.56 ml capacity and 5 large with 72.03 ml capacity) immersed in a water tank. As controls, two empty chambers were used to monitor microbial oxygen consumption overnight (blanks) and the oxygen depletion in each chamber was measured before (pre-blank) and after (post-blank) the trial, with empty chambers, to take into consideration the microbial oxygen consumption (background) within each chamber, and to minimise background microbial respiration, the system water was treated with UV for all duration of the experiment. Measurements lasted an average of 21 hours and were analysed with the FishResp R package [@morozov2019], calculating the oxygen uptake rate for each fish by subtracting the chamber volume occupied by the fish and background microbial respiration. The data collected allowed the SMR of each individual to be estimated.
+
+## Bites extraction methodology from video analysis
+
+| Column | Description | Accepted format |
+|-------------------|----------------------------------|-------------------|
+| run | The name of the video analysed | Fish ID + n° of the replica |
+| patch | The name of the patch in which the fish entered | "H" for high resource patch, "L" for low resource patch |
+| entrance | The time at which the fish entered the patch | mm:ss |
+| exit | The time at which the fish left the patch | mm:ss |
+| start | The time at which the fish started eating after entering the patch (start of the feeding episode) | mm:ss |
+| end | The time at which the fish stopped eating (end of the feeding episode) | mm:ss |
+| nbites | The number of bites taken by the fish in each feeding episode | Integer |
+
+: Structure of the spreadsheet used to store data. After the data entry was completed, the dataset was exported as .csv (semicolon; period) with UTF-8 character encoding. \label{tab:spreadsheet-structure}
+
+For the bite rate, data was gathered from the videos of @boulamail2025 foraging behaviour assay recorded using the Logitech HD 1080p camera. Since *P. sphenops* individuals feed by taking several bites in rapid succession between pauses (also known as the "foray" mode), each bite was counted separately rather than counting bursts of rapid bites as a single bite each [@nunes2021; @longo2019]. Every burst of rapid bites was considered a feeding episode. The videos were systematically reviewed, manually counting the number of bites through visual inspection. To do so, VLC software (version 3.0.20 Vetinari) was used as a media player to watch the videos. This data collection from videos also included which patch the fish entered, the time the fish entered the patch, the time it left the patch, the time it started eating and the time it stopped eating (Table \ref{tab:spreadsheet-structure}). Data was stored in an Excel spreadsheet (Microsoft Excel for Microsoft 365 MSO version 2410 Build 16.0.18129.20100 x64 bit) and, once the data entry was completed, it was exported as a Comma-separated values (CSV) text file (semicolon; period) with UTF-8 character encoding.
+
+## Scripts structure for data analysis
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.9\textwidth]{IMAGES/scripts_structure.png}
+  \caption{Representation of how the code for data analysis was structured to improve readability and code reuse. The workspace is organised with 3 child scripts (LOAD.R, TIME.R and BOXPLOT.R) controlled by a MAIN.R file. LOAD.R handles loading and preparing the dataset, including a TIME.R file that converts time values from the "mm:ss" format to seconds. BOXPLOT.R includes the function \texttt{fish\_box()}, which generates a series of box plots that are exported as a PDF file to a dedicated directory.}
+  \label{fig:scripts_structure}
+\end{figure}
+
+The dataset has been organised and analysed within the R free software environment [@base] using the packages dplyr [@dplyr] and ggplot2 [@ggplot2]. To improve readability and code reuse, the code was arranged as a workspace with 3 child scripts controlled by a MAIN.R file, including an embedded function used to test hypotheses by generating a series of box plots (Fig. \ref{fig:scripts_structure}). The MAIN.R file consists of the following:
+
+1.  Load the add-on packages dplyr [@dplyr] and ggplot2 [@ggplot2]
+2.  Set the working directory
+3.  Include the LOAD.R file, which handles loading and preparing the dataset for the next steps of data analysis
+4.  Include the BOXPLOT.R file, required to execute the nested function `fish_box()`
+5.  Execution of `fish_box()`, which generates a series of box plots that are exported as a PDF file to a dedicated directory for easy viewing and comparison of results
+6.  Other tests and plots for the data analysis (see chap. \ref{sec:data_analysis})
+
+The LOAD.R file handles the loading and preparation of the dataset, ensuring that it is ready for the visualisation and data analysis phase in the main script. This file consists of the following:
+
+1.  Data input of the bite rate dataset (Table \ref{tab:spreadsheet-structure}) and @boulamail2025 dataset
+2.  Union of the columns "sex" and "temperature" from the @boulamail2025 dataset to the bite rate dataset, creating a complete dataset for analysis that match the "sex" of the fish and the "temperature" at which the assay was performed (see par. \ref{sec:experimental_conditions}) with the corresponding value of "run"
+3.  Include the TIME.R file. This script converts time values from the "mm:ss" format to seconds making time data numerical and thus easier to analyse
+4.  Convert the columns "patch", "sex" and "temperature" as a factor to simplify the analysis
+5.  Remove the rows corresponding to when the fish did not explore the maze (`entrance=NA`) and when the fish did not eat (`nbites=NA`)
+6.  Add 2 columns, "cut_entrance" and "time". The "cut_entrance" column divides the "entrance" times into 4 categorical intervals of 5 minutes each (labels: "5 min", "10 min", "15 min", "20 min"), while "time" divides the same time interval into 8 numerical 2.5 minute intervals ("2.5" to "20"). These intervals facilitate the analysis of behaviour in specific time intervals
+
+The BOXPLOT.R file includes the function `fish_box()`, which generates a series of box plots that are exported as a PDF file to a dedicated directory, facilitating an intuitive comparison of y-distributions across x-ranges and z-groups (see chap. \ref{sec:data_analysis} for more details). This function is highly customizable, allowing for enhanced control over both aesthetics and functionality compared to standard plots. Users can adjust a range of elements through the function's arguments (Table \ref{tab:function-structure}), such as colour schemes, axis limits, legend positioning, and plot outlines, without needing to modify the underlying code. This flexibility produces visually appealing and analytically useful representations, making it a valuable tool for data exploration and analysis.
+
+| Argument | Description | Default Value |
+|-------------------|-----------------------------------|-------------------|
+| `pdf_path` | The file path to save the box plot as a PDF. | No default value |
+| `single_run` | If not set to `FALSE`, generates separate box plots for each unique value in this variable. | No default value |
+| `data` | The dataset to be used in the box plot. | No default value |
+| `x_val` | The independent x-variable to display on the x-axis. | No default value |
+| `y_val` | The dependent y-variable to display on the y-axis. | No default value |
+| `z_val` | Additional categorical z-variable to group data in the box plot. | No default value |
+| `col_val` | Colours for the groups represented in the box plot. | No default value |
+| `main` | The plot title; if set to `FALSE`, a default title is generated using "y_val \~ x_val \* z_val, single_run: run_val Outline: outline_val" where `run_val` represents the unique values within the `single_run` variable. | `FALSE` |
+| `ylab` | The y-axis label; if set to `FALSE`, uses the name of `y_val`. | `FALSE` |
+| `xlab` | The x-axis label; if set to `FALSE`, uses the name of `z_val`. | `FALSE` |
+| `legend_position` | Position of the legend in the plot; if set to `FALSE`, the legend is not displayed. | `FALSE` |
+| `ylim` | Limits for the y-axis; if set to `FALSE`, the limits are automatically calculated. | `FALSE` |
+| `no_outline` | When set to `TRUE`, creates two versions of each box plot: one with outlines and one without. If set to `FALSE`, only one box plot is created, with outlines included. | `FALSE` |
+
+: Summary of arguments for the `fish_box()` function inside the BOXPLOT.R file, detailing each argument's purpose and default value where present. These arguments allow for enhanced control over both aesthetics and functionality. \label{tab:function-structure}
+
+## Integrated RMarkdown workflow for data analysis and documentation
+
+The entire analytical process, along with the composition of this thesis as its documentation, was managed through an integrated R workflow that combines data management (dplyr package, @dplyr), analysis (base package, @base), visual representation (base and ggplot2 packages, @base; @ggplot2) and text editing (RMarkdown, @allaire2022). The workflow was designed to ensure reproducibility and consistency between analysis and content, forming a well-formatted final document that is updated each time the code is modified. This workflow is controlled by a MAIN_MARKDOWN.R that consists of the following:
+
+1.  Load the add-on packages rmarkdown [@allaire2022], bookdown [@xie2022], knitr [@xie2014], kableExtra [@zhu2021], pander [@pander], dplyr [@dplyr] and ggplot2 [@ggplot2]
+
+2.  Set the working directory
+
+3.  Include the MAIN_ANALYSIS.R file, which handles dataset loading, preparation, and data analysis, later incorporated into the MAIN.Rmd file through R code chunks
+
+4.  Render the MAIN.Rmd markdown file into the final PDF document Master_Thesis_Ventruti.pdf
+
+The final format chosen for the thesis was PDF, generated through the integration of a customised LaTeX template. This allowed for professional and academic formatting, with optimised margins, customised headings, and automatic numbering of figures and tables. The use of LaTeX was essential to precisely control the layout of the document and ensure a high-quality result.
+
+The text of the thesis was organised inside the MAIN.Rmd file into main sections (Introduction, Materials and Methods, Results, Discussion, References), where the Results section integrates R code chunks to perform analyses, generate graphs and tables and automatically include the results in the document. The graphs were created using ggplot2 package [@ggplot2] and basic R [@base], while the tables with the tests results were formatted using knitr [@xie2014], kableExtra [@zhu2021] and pander [@pander] packages. This integration makes it possible to create a fully automated document, where any changes to the code or data are immediately reflected in the final output.
+
+References management was fully automated using Zotero (version 6.0.36) implementation. A custom citation style file (apa.csl) was downloaded from Zotero Style Repository (<https://www.zotero.org/styles>) and implemented in RMarkdown to ensure that citations were formatted according to American Psychological Association 7th edition (APA) style. Zotero generated a references.bib file that was integrated into the workflow to automatically create and update the references as new citations were added. This approach simplified source management, reduced errors, and improved overall efficiency.
+
+\newpage
+
+# Data analysis \label{sec:data_analysis}
+
+## Analysis objectives and preliminary data analysis
+
+Different analyses were conducted to test how the number of different individuals of *Poecilia sphenops* bites in each feeding episode (`nbites`) changed under different experimental conditions. The number of bites has been considered as a proxy of *P. sphenops* ingestion rate [@nunes2021; @longo2019]. Since foraging behaviour includes the frequency and intensity of feeding actions, it directly affects its ability to exploit resources [@cozzoli2022].
+
+A bidirectional stepwise regression was performed as a preliminary assessment for the selection of the most significant variables and interactions, testing at each step for variables to be included or excluded depending on the most statistically significant improvement of the fit. The insights gained from the stepwise regression allowed the identification of the most influential predictors of the response variable `nbites`, ensuring that the most relevant factors and interactions were tested in the ANOVA and ANCOVA models.
+
+All box plots were realised using the `fish_box()` function, which generates a series of box plots to analyse how the dependent y-variable varies with the independent x-variable, grouped by an additional categorical variable, z (`x_val~y_val*z_val`, see Table \ref{tab:function-structure}). The binning of the z-variable into distinct groups allows visual comparison of the y-variable distributions across different x-value ranges and among the groups defined by z. A separate box plot is generated for each unique value in the column specified (`single_run`, see Table \ref{tab:function-structure}), allowing multiple plots to be generated simultaneously and compiled into a single PDF, facilitating an intuitive comparison of y-distributions across x-ranges and divided into z-groups.
+
+## Influence of sex and temperature on patch preferences
+
+A box plot (`nbites ~ patch * cut_entrance`) was used for visual analysis of how the number of bites for each feeding episode changed in the two patches. For statistical test, an ANCOVA (`nbites ~ patch * time`) model was used with `patch` as the categorical variable and `time` as a continuous covariate. This interaction ANCOVA examines whether the preference for patches varied according to time in a significant way and the combined effect that they have on bite rate.
+
+Differences in behaviour between the sexes were then analysed using separate box plots for males and females, showing the distribution of the number of bites for each feeding episode in the different patches and time intervals (`nbites ~ patch * cut_entrance`, `single_run="sex"`).
+
+The analysis then considered the effect of temperature on feeding behaviour. A box plot was used for visual analysis of how the number of bites in each feeding episode varied with temperature and time intervals (`nbites ~ temperature * cut_entrance`). Next, a one-way ANOVA (`nbites ~ temperature`) was performed to test whether the categorical variable `temperature` had a significant effect on the number of bites, considering only the main effect of temperature on `nbites`.
+
+To explore how temperature might influence patch preference, two box plots for each patch were generated (`nbites ~ temperature * cut_entrance`, `single_run="patch"`). A two-way ANOVA with interaction (`nbites ~ patch * temperature`) was performed to examine the combined effect of the categorical variables `patch` and `temperature` on the numerical variable `nbites`, testing whether patch preference varied with temperature.
+
+## Combined effects of sex and temperature on bite rate
+
+The last analysis examined the relationship between sex and temperature to understand whether these factors had a combined effect on feeding behaviour. To do so, separate box plots were generated for males and females showing the variation in the number of bites in each feeding episode as a function of temperature and time interval (`nbites ~ temperature * cut_entrance`, `single_run=sex`). A two-way ANOVA with interaction (`nbites ~ sex* temperature`) was then performed to test the combined effect of the categorical variables `sex` and `temperature` on the numerical variable `nbites`. Next, a Tukey HSD post-hoc test was used to identify specific differences between groups as a function of sex and temperature combinations. Finally, an interaction plot was generated using the ggplot2 R package [@ggplot2] to show how the effect of temperature on the number of bites in each feeding episode varied between males and females.
+
+## Appendix
+
+*Software*: All analyses were performed within the R free software environment [@base] using the packages dplyr [@dplyr] and ggplot2 [@ggplot2].
+
+*Data and code availability*: Data and R codes are publicly available in GitHub Repository (<https://github.com/ventrutis/sphenops-bites>).
+
+\newpage
+
+# Results
+
+```{r step_wise}
+lm_mod = lm(nbites ~ temperature * sex * entrance * patch, data = bites)
+final_model = step(lm_mod, trace = 0)
+
+summary_table = summary(final_model)$coefficients
+
+kable(summary_table, format = "latex", booktabs = TRUE, caption = "Results of Step-wise Regression \\label{tab:stepwise}") %>%
+  kable_styling(latex_options = c("hold_position", "scale_down"))
+
+
+```
+
+## Patch preferences through time \label{sec:patch-preference}
+
+```{r patch_ANCOVA}
+
+p_ancova = aov(nbites ~ patch * time, data = bites)
+
+pander(summary(p_ancova), 
+       caption = "ANCOVA test results show a significant effect of patch type and time on the number of bites in each feeding episode. \\label{tab:patch_ANCOVA}")
+
+```
+
+The test results \ref{sec:data_analysis} showed that for *Poecilia sphenops* there's a significant preference (ANCOVA, $F (1,2051) = 54.4, p < 0.001$) for the high resource patch (patch H) over the low resource patch (patch L). The number of bites in each feeding episode tended to be higher in the H patch at the beginning of the observation period and decreased over time (ANCOVA, $F(1,2051)=13.49, p<0.001$), with an upper boundary trend (Fig. \ref{fig:patch_boxplot}, Table \ref{tab:patch_ANCOVA}). This pattern indicates a saturation of the energy gain required, with a drop in ingestion rate and consequent decrease of interest in the H patch over time.
+
+```{r patch_boxplot, fig.cap="The box plot shows a significant patch preference for the high resource patch (patch H) over the low resource patch (patch L). \\label{fig:patch_boxplot}"}
+
+boxplot(nbites~patch*cut_entrance, data = bites, 
+        col=c("#1b9e77", "#d95f02"), ylim=c(0,80), xaxt="n",
+         ylab="N° of bites per feeding episode",xlab="Time")
+axis(1, at = c(1.5,3.5,5.5,7.5), labels = c("5 min", "10 min", "15 min", "20 min"))
+abline(v=c(2.5,4.5,6.5), lty=2, col="grey")
+legend("topright", legend = c("Patch H", "Patch L"), col = c("#1b9e77", "#d95f02"), pch = 16)
+
+```
+
+## Effects of temperature on foraging behaviour
+
+The number of bites for each feeding episode increases significantly when the temperature is higher (stepwise regression, $estimate=10.45, SE=2.49, t(2039)=4.20, p < 0.001$), especially during the first few minutes of observation (Fig. \ref{fig:temp_boxplot}). *P. sphenops* increases its foraging activity at higher temperatures (ANOVA, $F(1,2051)=13.49, p<0.005$, Table \ref{tab:temp_ANOVA}). At 28°C the fishes bite less in the patch with few resources (stepwise regression, $estimate=-9.90, SE=3.42, t(2039)=-2.89, p < 0.005$). The effect of temperature on biting is stronger in patches with higher resources (Fig. \ref{fig:temp_patch_boxplot}), but no significant interaction was found in the test performed (ANOVA,$F(1, 2051)=0.17, p=0.68$), as the observed trend maintains a constant proportionality between the variables (Table \ref{tab:temp_ANOVA}).
+
+```{r temp_boxplot, fig.cap="The box plot shows how the number of bites for each feeding episode changes between the two treatment temperatures. \\label{fig:temp_boxplot}"}
+
+boxplot(nbites~temperature*cut_entrance, data = bites, 
+        col=c("#1f77b4", "#d62728"), ylim=c(0,80), xaxt="n",
+         ylab="N° of bites per feeding episode",xlab="Time")
+axis(1, at = c(1.5,3.5,5.5,7.5), labels = c("5 min", "10 min", "15 min", "20 min"))
+abline(v=c(2.5,4.5,6.5), lty=2, col="grey")
+legend("topright", legend = c("25°C", "28°C"), col = c("#1f77b4", "#d62728"), pch = 16)
+
+```
+
+```{r temp_patch_boxplot, fig.cap="Box plots describing the different effects of temperature on bite rate in the high resource patch (patch H) and the low resource patch (patch L). \\label{fig:temp_patch_boxplot}", fig.width=12}
+H_data = subset(bites, patch == "H")
+L_data = subset(bites, patch == "L")
+
+par(mfrow = c(1, 2))
+
+boxplot(nbites~temperature*cut_entrance, data = H_data, 
+        col=c("#1f77b4", "#d62728"), ylim=c(0,80), xaxt="n",
+        main="Temperature effect on patch H", ylab="N° of bites per feeding episode",xlab="Time")
+axis(1, at = c(1.5,3.5,5.5,7.5), labels = c("5 min", "10 min", "15 min", "20 min"))
+abline(v=c(2.5,4.5,6.5), lty=2, col="grey")
+legend("topright", legend = c("25°C", "28°C"), col = c("#1f77b4", "#d62728"), pch = 16)
+
+boxplot(nbites~temperature*cut_entrance, data = L_data, 
+        col=c("#1f77b4", "#d62728"), ylim=c(0,80), xaxt="n",
+        main="Temperature effect on patch L", ylab="N° of bites per feeding episode",xlab="Time")
+axis(1, at = c(1.5,3.5,5.5,7.5), labels = c("5 min", "10 min", "15 min", "20 min"))
+abline(v=c(2.5,4.5,6.5), lty=2, col="grey")
+legend("topright", legend = c("25°C", "28°C"), col = c("#1f77b4", "#d62728"), pch = 16)
+```
+
+```{r temp_ANOVA}
+
+temp_anova = aov(nbites ~ patch * temperature, data = bites)
+
+pander(summary(temp_anova), 
+       caption = "ANOVA test results show a significant effect of temperature on the number of bites in each feeding episode, but the interaction effect of patch type and temperature is not significant. \\label{tab:temp_ANOVA}")
+
+```
+
+## Differences in patch preference between sexes
+
+Sex may influence the foraging behaviour as well since the male sex has a significant positive effect on the number of bites for each feeding episode (stepwise regression, $estimate=6.37, SE=2.80, t(2039)=2.28, p < 0.05$), with males biting more than females (Table \ref{tab:stepwise}). The trend seems more irregular in males, showing a more exploratory behaviour than in females (Fig. \ref{fig:patch_sex_boxplot}).
+
+```{r patch_sex_boxplot, fig.cap="Box plots describing the different effects of sex on bite rate in the high resource patch (patch H) and the low resource patch (patch L).  \\label{fig:patch_sex_boxplot}", fig.width=12}
+
+M_data = subset(bites, sex == "M")
+F_data = subset(bites, sex == "F")
+
+par(mfrow = c(1, 2))
+boxplot(nbites ~ patch * cut_entrance, data = M_data, 
+        col = c("#1b9e77", "#d95f02"), ylim = c(0, 80), xaxt = "n",
+        main = "Males", ylab = "N° of bites per feeding episode", xlab = "Time")
+axis(1, at = c(1.5, 3.5, 5.5, 7.5), labels = c("5 min", "10 min", "15 min", "20 min"))
+abline(v = c(2.5, 4.5, 6.5), lty = 2, col = "grey")
+legend("topright", legend = c("Patch H", "Patch L"), col = c("#1b9e77", "#d95f02"), pch = 16)
+
+# Boxplot per le femmine
+boxplot(nbites ~ patch * cut_entrance, data = F_data, 
+        col = c("#1b9e77", "#d95f02"), ylim = c(0, 80), xaxt = "n",
+        main = "Females", ylab = "N° of bites per feeding episode", xlab = "Time")
+axis(1, at = c(1.5, 3.5, 5.5, 7.5), labels = c("5 min", "10 min", "15 min", "20 min"))
+abline(v = c(2.5, 4.5, 6.5), lty = 2, col = "grey")
+legend("topright", legend = c("Patch H", "Patch L"), col = c("#1b9e77", "#d95f02"), pch = 16)
+
+```
+
+## Combined effects of sex and temperature on feeding behaviour
+
+The interaction between sex and temperature may have a combined effect on feeding behaviour (stepwise regression, $estimate=10.89, SE=5.13, t(2039)=2.13, p < 0.05$). Males have a higher bite rate than females, and since higher temperatures correspond to an increase in the number of bites, male fish at 28°C show a higher bite rate, nevertheless this difference it's not significant (Tukey HSD, $p=0.16$). The different effect of temperature on behaviour is significantly higher for females (Tukey HSD, $p<0.005$, Table \ref{tab:tukey_result}, Fig.\ref{fig:interaction_plot}).
+
+```{r interaction_plot, warning=FALSE, fig.cap="Interaction plot shows how females have a more significant response to high temperature. \\label{fig:interaction_plot}"}
+ggplot(bites, aes(x = temperature, y = nbites, 
+                  group = sex, 
+                  color = sex)) +
+  
+  # Adding lines with group colors
+  stat_summary(fun = "mean", geom = "line", size = 1.2) +  # Colored lines
+  
+  # Adding error bars with group colors
+  stat_summary(fun.data = "mean_se", geom = "errorbar",
+               aes(color = sex), size = 1, width = 0.3) +
+  
+  # Custom colors for lines
+  scale_color_manual(values = c("#FF69B4", "#FFB6C1"), name = "Sex") + # Change legend title to "Sex"
+  theme_classic() +
+  labs(x = "Temperature (°C)", y = "N° of bites for each feeding episode") +
+  
+  # Customizing the legend to show only colored points
+  guides(color = guide_legend(override.aes = list(
+    shape = 21,     # Circle shape with fill
+    size = 5,       # Larger points in the legend
+    fill = c("#FF69B4", "#FFB6C1"),  # Fill colors for each group
+    stroke = 0.5    # Border thickness for the points
+  )))
+
+```
+
+```{r tukey_result}
+
+sex_temp_anova = aov(nbites ~ sex * temperature, data = bites)
+tukey_result= TukeyHSD(sex_temp_anova)
+
+pander(tukey_result$`sex:temperature`, 
+       caption = "Tukey HSD post-hoc test shows how sex and temperature may have a combined effect on the number of bites in each feeding episode. Difference in behaviour is not significant for males and significantly higher for females, which have a more pronounced response to high temperature.  \\label{tab:tukey_result}")
+
+```
+
+\newpage
+
+# Discussion
+
+The objective of this thesis were: a) to analyse how individual foraging behaviour can be influenced by temperature b) contextually, to develop an R workflow integrating data management (dplyr package, @dplyr), analysis (base package, @base), visual representation (base and ggplot2 packages, @base; @ggplot2 ) and text editing (RMarkdown, @allaire2022). The study has demonstrated that the effect of temperature may vary between sexes in *Poecilia sphenops*, with greater foraging activity observed at 28°C, especially in females. The number of bites for each feeding episode was used as a measurable proxy for the fish ingestion rate, proving that temperature variations and sex differences directly influence foraging decisions. Differences in the response to temperature change between the two sexes may be due to differences in metabolic rate, suggesting how POLS may influence the feeding efficiency of the species and highlighting the importance of considering sex as a key variable in future ecological studies.
+
+## Patch preference
+
+A key element of foraging behaviour is the selection of resource patches, which an individual selects based on resource availability. Studies conducted in this thesis revealed that the fish tended to prefer patches with higher resource availability during the first few minutes of observation, followed by a drop in ingestion rate and consequent decrease in interest in the high resource patch over time. This pattern is coherent with Holling's type II functional response, where the forager is characterized by a decreasing intake rate due to resource consumption [@Holling1959] since the foraging energetics costs have been balanced by the energy gain coming from the resource ingested [@brown1988]. This strategy may be a physiological and behavioural response to maximise energy efficiency, as stated by the Optimal Foraging Theory [@macarthur1966].
+
+In a broader context, these conclusions support the idea of organisms as cybernetic systems that dynamically respond to environmental inputs to optimise resource acquisition [@abram2017; @oconnor2019]. The adaptation of *P. sphenops* to perceived reduced resource availability over time appears to follow a cybernetic feedback loop in which foraging behaviour actively modifies resource distribution, thereby altering environmental conditions, since feedback-based foraging behaviour can influence resource exploitation efficiency [@cozzoli2018; @basset1995]. This supports the idea that resource exploitation efficiency is critical for survival in variable environments and that rapid adaptation to conditions is essential for maintaining individual fitness.
+
+## Temperature effects on foraging behaviour
+
+One of the environmental factors that influence the foraging behaviour of ectotherms is temperature [@may1979; @woods2015]. Increasing temperature led to an increase in the number of bites for each feeding episode, suggesting greater metabolic activity at higher temperatures. This finding is consistent with @nunes2021 theory based on the Metabolic Theory of Ecology, which predicts an increase in foraging rate in terms of bite rate, due to the increased metabolic rate, as environmental temperature increases. The cybernetic behaviour of this fish allows us to observe a direct effect of temperature on the organism's ability to process environmental information and act accordingly [@abram2017]. In line with the concept of Thermal-Behavioural Syndrome (TBS) introduced by @goulet2017a and included in the extended POLS model, the increase in temperature could push the fish towards a more "hot/bold" behaviour, with a more aggressive and exploratory response oriented towards maximising foraging and energy intake [@careau2008; @réale2010]. This highlights how temperature can shape space/resource use and foraging decisions, providing a bridge between metabolic and foraging theories to improve our understanding of how organisms adapt foraging rates to environmental conditions, especially in the face of climate change [@shokri2024].
+
+## Differences in patch preference and temperature sensitivity between sexes
+
+An additional finding from this thesis involves the analysis of sex differences in patch preferences and temperature sensitivity. Specifically, females show a more significant response to high temperatures than males, with significantly greater foraging activity at 28°C. The greater sensitivity of females may indicate a critical role of metabolism in the regulation of foraging behaviour and may reflect an adaptive response to temperature variation to ensure optimal foraging and energy intake. Differences in behaviour between males and females may reflect specific physiological and reproductive needs, as suggested by @montiglio2018, in the perspective of POLS. Females may have greater resource requirements due to higher metabolic rates leading them to maximise energy intake in warmer environments. Furthermore, as suggested by @köhler2011, females of *P. sphenops* tend to forage for longer periods in the absence of males, while males exhibit a faster pace of life strategy [@tarka2018], with more exploratory, aggressive and mate-seeking behaviour. This "pace of life" in males is associated with exploratory behaviour and a tendency to have a larger home range which is likely related to active mate seeking [@perry2002; @todd2021]. Sexual differences between fishes and other aquatic animals are associated with differences in territoriality [@matich2011], morphological traits [@cummings2006], and social interactions [@killen2016]. This increased sensitivity of females to temperature increases our knowledge of behavioural differences in response to environmental change and highlights the importance of considering sex as a key variable in future ecological studies.
+
+## Limitations and future perspectives
+
+While this study has provided valuable insights into the relationship between temperature, patch preference, and foraging behaviour in *Poecilia sphenops*, there are areas for improvement that could enhance future research. First, the controlled mesocosm context of the experiment may not fully reflect natural conditions, where fishes face greater environmental variability and more complex interactions with other organisms. Also, one aspect that could improve the understanding of the feeding behaviour of *Poecilia sphenops* is the inclusion of the Standard Metabolic Rate (SMR) as a variable. SMR provides crucial information on the energetic needs of organisms, which directly influences their foraging requirements and their ability to adapt to temperature fluctuations. SMR may help to better explain inter-individual differences in foraging behaviour and responses to environmental conditions, as metabolism is the underlying mechanism linking all POLS traits [@gopal2023].
+
+## Strengths and limitations of the integrated RMarkdown workflow
+
+The integrated workflow developed in R represents an effective approach to combine data manipulation, analysis, visualisation and reporting in a single environment. Key strengths include the simple implementation, the results reproducibility and the automatic integration of text, tables and graphs into one final document. This approach makes possible the automated analysis and documentation process without manual updates to results, graphs and tables in the final document. Any changes made to the data or code are immediately reflected in the document, ensuring consistency and accuracy between text, analytical results and visualisations. This integration has significantly reduced the risk of errors arising from repetitive manual operations, such as inserting or editing figures and tables. It has also improved overall efficiency, allowing more time and resources to be focused on interpreting results and writing the thesis.
+
+The simplicity of RMarkdown can also be a limitation in certain contexts. While it allows for the rapid generation of well-organised and simple documents, it is less suitable for complex or specific formatting. For example, to produce a PDF formatted according to academic standards, it was necessary to integrate LaTeX to customise margins, headings, and the automatic numbering of figures and tables. This process requires additional skills and careful planning of the final format, as the choice of format (e.g., PDF, HTML, or Word) must be made from the very beginning. Each format requires the use of different languages for customisation: LaTeX for PDF, CSS and HTML for web documents, or Pandoc for advanced templates in Word. It is essential to adapt the workflow to the specific needs of the chosen format and ensure that the user has adequate knowledge of the customisation tools required. Despite these challenges, the workflow used in this thesis demonstrates how RMarkdown, in combination with advanced tools such as LaTeX, can be a powerful and flexible option for scientific documentation, achieving high-quality results.
+
+## Conclusion
+
+These findings highlight the importance of temperature as a driver of metabolic and behavioural adaptations, particularly for ectotherms that rely on environmental conditions to regulate their physiological processes. Increased activity at higher temperatures and differences in response between sexes highlight how these factors need to be considered in the future to predict foraging strategies in the face of climate change. These results improve the understanding of behavioural ecology and provide useful insights for species conservation in rapidly changing environments.
+
+## Appendix
+
+*Software*: This thesis was written using the R free software environment [@base] using the packages rmarkdown [@allaire2022], bookdown [@xie2022], knitr [@xie2014], kableExtra [@zhu2021], pander [@pander] and ggplot2 [@ggplot2].
+
+*Data and code availability*: Data and RMarkdown codes are publicly available in GitHub Repository (<https://github.com/ventrutis/sphenops-bites>).
+
+\newpage
+
+# References
+
+::: {#refs}
+:::
+
+\newpage
+
+\thispagestyle{empty} <!-- doesn't show page number --> \vspace*{\stretch{1}}
+
+\begin{flushright}
+\noindent
+"Despite everything, it's still you." \\[1em] 
+(Toby Fox,\textit{Undertale}, 2015)
+\end{flushright}
+\vspace*{\stretch{6}}
+\cleardoublepage
